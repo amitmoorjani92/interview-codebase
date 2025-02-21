@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { Card, Title, Text, Loader, Image, Button, Alert } from "@mantine/core";
+import { Card, Title, Text, Loader, Image, Button, Alert, Center } from "@mantine/core";
 import useLaunchDetails from "../../hooks/useLaunchDetails";
 import useRocketDetails from "../../hooks/useRocketDetails";
 
@@ -9,7 +9,13 @@ const LaunchDetail = () => {
   const { data: launch, isLoading, isError } = useLaunchDetails(id);
   const { data: rocket, isLoading: rocketLoading } = useRocketDetails(launch?.rocket);
 
-  if (isLoading) return <Loader size="xl" />;
+  if (isLoading) {
+    return (
+      <Center style={{ height: "100vh" }}>
+        <Loader size="xl" />
+      </Center>
+    );
+  }
   if (isError) return <Alert color="red">Failed to load launch details.</Alert>;
 
   return (

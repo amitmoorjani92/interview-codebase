@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Table, Loader, TextInput, Select, Title, Card, Button } from "@mantine/core";
+import { Table, Loader, TextInput, Select, Title, Card, Button, Center } from "@mantine/core";
 import useLaunches from "../../hooks/useLaunches";
 
 interface Launch {
@@ -31,7 +31,13 @@ const Launches: React.FC = () => {
     setSearchParams(params);
   }, [search, year, setSearchParams]);
 
-  if (isLoading) return <Loader size="xl" />;
+  if (isLoading) {
+    return (
+      <Center style={{ height: "100vh" }}>
+        <Loader size="xl" />
+      </Center>
+    );
+  }
   if (isError) return <p>Error loading launches.</p>;
 
   const filteredLaunches = data?.filter((launch: Launch) => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Table, Loader, Card, Title, Pagination, Button } from "@mantine/core";
+import { Table, Loader, Card, Title, Pagination, Button, Center } from "@mantine/core";
 import useStarWars from "../../hooks/useStarWars";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,13 @@ const StarWarsList = () => {
   const { data, isLoading, isError } = useStarWars(activePage);
   const navigate = useNavigate();
 
-  if (isLoading) return <Loader size="xl" />;
+  if (isLoading) {
+    return (
+      <Center style={{ height: "100vh" }}>
+        <Loader size="xl" />
+      </Center>
+    );
+  }
   if (isError) return <p>Error loading Star Wars characters.</p>;
 
   return (

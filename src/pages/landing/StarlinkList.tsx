@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Table, Loader, TextInput, Card, Title, Pagination, Button } from "@mantine/core";
+import { Table, Loader, TextInput, Card, Title, Pagination, Button, Center } from "@mantine/core";
 import useStarlink from "../../hooks/useStarlink";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +11,13 @@ const StarlinkList = () => {
   const [activePage, setActivePage] = useState<number>(1);
   const navigate = useNavigate();
 
-  if (isLoading) return <Loader size="xl" />;
+  if (isLoading) {
+    return (
+      <Center style={{ height: "100vh" }}>
+        <Loader size="xl" />
+      </Center>
+    );
+  }
   if (isError) return <p>Error loading Starlink data.</p>;
 
   // Filter satellites by name
